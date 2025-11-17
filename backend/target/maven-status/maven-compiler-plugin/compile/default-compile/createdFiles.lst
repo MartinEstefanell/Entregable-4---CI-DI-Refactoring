@@ -1,0 +1,8 @@
+com\playlists\app\model\CreateVideoRequest.class
+com\playlists\app\model\Video.class
+com\playlists\app\repository\FilePlaylistRepository$1.class
+com\playlists\app\controller\VideoController.class
+com\playlists\app\MiPlaylistAplication.class
+com\playlists\app\repository\VideoRepository.class
+com\playlists\app\service\VideoService.class
+com\playlists\app\repository\FilePlaylistRepository.class
