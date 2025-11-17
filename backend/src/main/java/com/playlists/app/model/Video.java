@@ -27,6 +27,9 @@ public class Video {
 
     private boolean favorite;
 
+    @Column(name = "user_liked")
+    private boolean userLiked;
+
     public Video() {
     }
 
@@ -38,6 +41,7 @@ public class Video {
         this.url = url;
         this.likes = 0;
         this.favorite = false;
+        this.userLiked = false;
     }
 
     public Long getId() {
@@ -102,6 +106,14 @@ public class Video {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public boolean isUserLiked() {
+        return userLiked;
+    }
+
+    public void setUserLiked(boolean userLiked) {
+        this.userLiked = userLiked;
     }
 
     @Override

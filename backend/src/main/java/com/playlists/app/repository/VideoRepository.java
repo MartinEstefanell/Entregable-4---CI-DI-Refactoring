@@ -9,4 +9,5 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 	java.util.Optional<Video> findByYoutubeId(String youtubeId);
 	java.util.List<Video> findByFavoriteTrue();
 	java.util.List<Video> findByLikesGreaterThan(int likes);
+	java.util.List<Video> findByUserLikedTrue();
 }

@@ -47,6 +47,14 @@ public class VideoService {
         }
 
         Video v = new Video(req.getYoutubeId(), req.getTitle(), req.getChannelTitle(), req.getThumbnailUrl(), req.getUrl());
+
+        int likes = 0;
+        if (req.getLikes() != null && req.getLikes() >= 0) {
+            likes = req.getLikes();
+        }
+        v.setLikes(likes);
+        v.setUserLiked(Boolean.TRUE.equals(req.getUserLiked()));
+
         return repository.save(v);
     }
 
@@ -61,7 +69,7 @@ public class VideoService {
     public synchronized Optional<Video> like(Long id) {
         Optional<Video> opt = repository.findById(id);
         opt.ifPresent(v -> {
-            v.setLikes(v.getLikes() + 1);
+            v.setUserLiked(!v.isUserLiked());
             repository.save(v);
         });
         return opt;
@@ -85,7 +93,7 @@ public class VideoService {
     }
 
     public synchronized List<Video> listLiked() {
-        return repository.findByLikesGreaterThan(0);
+        return repository.findByUserLikedTrue();
     }
 }
 

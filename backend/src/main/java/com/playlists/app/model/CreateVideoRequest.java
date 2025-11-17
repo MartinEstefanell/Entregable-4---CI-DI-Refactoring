@@ -6,6 +6,8 @@ public class CreateVideoRequest {
     private String channelTitle;
     private String thumbnailUrl;
     private String url;
+    private Integer likes;
+    private Boolean userLiked;
 
     public CreateVideoRequest() {
     }
@@ -48,5 +50,21 @@ public class CreateVideoRequest {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Boolean getUserLiked() {
+        return userLiked;
+    }
+
+    public void setUserLiked(Boolean userLiked) {
+        this.userLiked = userLiked;
     }
 }
