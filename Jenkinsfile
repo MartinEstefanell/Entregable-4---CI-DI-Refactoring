@@ -12,8 +12,8 @@ pipeline {
         stage('Build backend') {
             steps {
                 dir('backend') {
-                    // Compila el backend (Spring Boot) sin correr tests todavía
-                    bat 'mvn -B clean package -DskipTests'
+                    // Ruta completa a mvn (según tu instalación con Scoop)
+                    bat '"C:\\Users\\agust\\scoop\\apps\\maven\\current\\bin\\mvn" -B clean package -DskipTests'
                 }
             }
         }
@@ -21,8 +21,7 @@ pipeline {
         stage('Run backend tests') {
             steps {
                 dir('backend') {
-                    // Ejecuta los tests automáticos (JUnit)
-                    bat 'mvn test'
+                    bat '"C:\\Users\\agust\\scoop\\apps\\maven\\current\\bin\\mvn" test'
                 }
             }
         }
@@ -30,7 +29,9 @@ pipeline {
         stage('Build frontend') {
             steps {
                 dir('Frontend') {
-                    // Instala dependencias y construye el build de producción
+                    // Por ahora dejamos npm "normal".
+                    // Si después falla con 'npm is not recognized',
+                    // hacemos lo mismo que con mvn usando la ruta completa de npm.
                     bat 'npm install'
                     bat 'npm run build'
                 }
