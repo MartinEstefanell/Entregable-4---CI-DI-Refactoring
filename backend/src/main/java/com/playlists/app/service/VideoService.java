@@ -1,10 +1,8 @@
 package com.playlists.app.service;
-
 import com.playlists.app.model.CreateVideoRequest;
 import com.playlists.app.model.Video;
 import com.playlists.app.repository.VideoRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.net.MalformedURLException;
@@ -83,26 +81,10 @@ public class VideoService {
 
     public synchronized Optional<Video> toggleFavorite(Long id) {
         return updateVideoProperty(id, v -> v.setFavorite(!v.isFavorite()));
-    }
+    } 
     
 
-    /*public synchronized Optional<Video> like(Long id) {
-        Optional<Video> opt = repository.findById(id);
-        opt.ifPresent(v -> {
-            v.setUserLiked(!v.isUserLiked());
-            repository.save(v);
-        });
-        return opt;
-    }
 
-    public synchronized Optional<Video> toggleFavorite(Long id) {
-        Optional<Video> opt = repository.findById(id);
-        opt.ifPresent(v -> {
-            v.setFavorite(!v.isFavorite());
-            repository.save(v);
-        });
-        return opt;
-    } */
     
 
     public synchronized Optional<Video> findById(Long id) {
