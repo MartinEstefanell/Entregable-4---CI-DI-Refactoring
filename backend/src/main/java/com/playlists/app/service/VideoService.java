@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.function.Consumer;
 
 @Service
 public class VideoService {
@@ -33,7 +34,6 @@ public class VideoService {
             throw new IllegalArgumentException("url is required");
         }
 
-        // Validate URL format
         try {
             new URL(req.getUrl());
         } catch (MalformedURLException e) {
@@ -52,6 +52,7 @@ public class VideoService {
         if (req.getLikes() != null && req.getLikes() >= 0) {
             likes = req.getLikes();
         }
+
         v.setLikes(likes);
         v.setUserLiked(Boolean.TRUE.equals(req.getUserLiked()));
 
@@ -66,7 +67,26 @@ public class VideoService {
         return false;
     }
 
+    
+    private synchronized Optional<Video> updateVideoProperty(Long id, Consumer<Video> updater) {
+    Optional<Video> opt = repository.findById(id);
+    opt.ifPresent(v -> {
+        updater.accept(v);
+        repository.save(v);
+    });
+    return opt;
+}
+
     public synchronized Optional<Video> like(Long id) {
+        return updateVideoProperty(id, v -> v.setUserLiked(!v.isUserLiked()));
+    }
+
+    public synchronized Optional<Video> toggleFavorite(Long id) {
+        return updateVideoProperty(id, v -> v.setFavorite(!v.isFavorite()));
+    }
+    
+
+    /*public synchronized Optional<Video> like(Long id) {
         Optional<Video> opt = repository.findById(id);
         opt.ifPresent(v -> {
             v.setUserLiked(!v.isUserLiked());
@@ -82,7 +102,8 @@ public class VideoService {
             repository.save(v);
         });
         return opt;
-    }
+    } */
+    
 
     public synchronized Optional<Video> findById(Long id) {
         return repository.findById(id);

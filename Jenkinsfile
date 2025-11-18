@@ -12,7 +12,7 @@ pipeline {
         stage('Build backend') {
             steps {
                 dir('backend') {
-                    // Ruta completa a mvn (según tu instalación con Scoop)
+                    // Ruta completa a mvn 
                     bat '"C:\\Users\\agust\\scoop\\apps\\maven\\current\\bin\\mvn" -B clean package -DskipTests'
                 }
             }
@@ -29,9 +29,6 @@ pipeline {
         stage('Build frontend') {
             steps {
                 dir('Frontend') {
-                    // Por ahora dejamos npm "normal".
-                    // Si después falla con 'npm is not recognized',
-                    // hacemos lo mismo que con mvn usando la ruta completa de npm.
                     bat 'npm install'
                     bat 'npm run build'
                 }

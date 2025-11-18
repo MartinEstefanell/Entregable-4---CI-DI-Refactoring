@@ -45,9 +45,6 @@ export default function MyListPage() {
             Paso 3
           </p>
           <h1 className="text-4xl font-semibold">Mi lista</h1>
-          <p className="text-white/70">
-            Todo lo que guardaste se persiste en H2 via backend Java.
-          </p>
         </header>
 
         {isLoading ? (
